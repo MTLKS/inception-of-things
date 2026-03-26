@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
     end
 
     # https://developer.hashicorp.com/vagrant/docs/provisioning/shell
-    maliewS.vm.provision "shell", path: "scripts/install-k3s-server.sh"
+    maliewS.vm.provision "shell", path: "scripts/install-k3s-server.sh", env: { "TOKEN" => ENV["TOKEN"] }
   end
 
   config.vm.define "maliewSW" do |maliewSW|
@@ -30,6 +30,6 @@ Vagrant.configure("2") do |config|
       v.cpus = 1
     end
 
-    maliewSW.vm.provision "shell", path: "scripts/install-k3s-agent.sh"
+    maliewSW.vm.provision "shell", path: "scripts/install-k3s-agent.sh", env: { "TOKEN" => ENV["TOKEN"] }
   end
 end
